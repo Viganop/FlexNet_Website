@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FlexNet Telecom — Internet Rápida para Sua Casa</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400&family=Barlow+Condensed:wght@700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="nav-inner">
+      <div class="logo">
+        <span class="logo-flex">Flex</span><span class="logo-net">Net</span>
+        <span class="logo-sub">TELECOM</span>
+      </div>
+      <nav class="nav-links">
+        <a href="#">Home</a>
+        <a href="#planos">Planos</a>
+        <a href="#">Feedbacks</a>
+      </nav>
+      <a href="#planos" class="btn-contratar">Contratar agora</a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="nav-banner">
+      📡 Atendemos em <strong>São Carlos</strong>, <strong>Ibaté</strong> e <strong>Araraquara</strong>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg-grid"></div>
+    <div class="hero-glow"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">Conecte-se ao futuro</p>
+      <h1 class="hero-title">
+        <span class="hero-title-light">INTERNET RÁPIDA</span>
+        <span class="hero-title-accent">PARA SUA CASA</span>
+        <span class="hero-title-sub">COM AS <strong>MELHORES OPERADORAS</strong></span>
+      </h1>
+      <a href="#planos" class="btn-ver-planos">Ver Planos</a>
+      <div class="hero-stars">
+        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+        <small>+2.000 clientes satisfeitos</small>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="signal-ring r1"></div>
+      <div class="signal-ring r2"></div>
+      <div class="signal-ring r3"></div>
+      <div class="signal-icon">📶</div>
+    </div>
+  </section>
+
+  <!-- OPERADORAS STRIP -->
+  <section class="operadoras-strip">
+    <div class="strip-inner">
+      <div class="strip-icon">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M5 12.55a11 11 0 0 1 14.08 0"/>
+          <path d="M1.42 9a16 16 0 0 1 21.16 0"/>
+          <path d="M8.53 16.11a6 6 0 0 1 6.95 0"/>
+          <circle cx="12" cy="20" r="1" fill="currentColor"/>
+        </svg>
+      </div>
+      <div class="strip-text">
+        <h2>ESCOLHA SUA OPERADORA COM OS <strong>MELHORES PLANOS</strong></h2>
+      </div>
+      <div class="strip-icon-right">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="5" y="2" width="14" height="20" rx="2" ry="2"/>
+          <line x1="12" y1="18" x2="12.01" y2="18" stroke-width="3"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- OPERADORAS LOGOS -->
+  <section class="operadoras-logos">
+    <div class="logos-grid">
+      <div class="logo-card vivo" data-op="vivo">
+        <span>vivo</span> <sup>✦</sup>
+      </div>
+      <div class="logo-card algar" data-op="algar">
+        <span>Algar</span><span class="arrow">›</span>
+      </div>
+      <div class="logo-card desktop" data-op="desktop">
+        <div class="desktop-icon">🖥</div>
+        <span>DESKTOP</span>
+      </div>
+      <div class="logo-card claro" data-op="claro">
+        <span>Claro</span><sup>✦</sup>
+      </div>
+      <div class="logo-card hdnet" data-op="hdnet">
+        <span>HD<em>NET</em></span>
+        <small>FIBRA</small>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLANOS -->
+  <section class="planos-section" id="planos">
+    <div class="planos-inner">
+
+      <!-- Filtros -->
+      <div class="filtros">
+        <button class="filtro active" data-filtro="internet">Internet</button>
+        <button class="filtro" data-filtro="internet-celular">Internet + Celular</button>
+        <button class="filtro" data-filtro="tv-internet">TV + Internet</button>
+        <button class="filtro" data-filtro="planos-premium">Planos Premium</button>
+      </div>
+
+      <!-- Cards de planos -->
+      <div class="planos-grid" id="planosGrid">
+
+        <div class="plano-card destaque" data-categoria="internet">
+          <div class="plano-badge">🏆 Melhor Oferta</div>
+          <div class="plano-mega">600<span>MEGA</span></div>
+          <ul class="plano-features">
+            <li><strong>600 MEGA</strong> de download</li>
+            <li><strong>600 MEGA</strong> de upload</li>
+            <li>WiFi incluso</li>
+            <li>Apps de conteúdo com <strong>Watch</strong></li>
+          </ul>
+          <div class="plano-apps">
+            <span class="app-dot red"></span>
+            <span class="app-dot blue"></span>
+            <span class="app-dot green"></span>
+            <span class="app-dot purple"></span>
+          </div>
+          <a href="#" class="ver-detalhes">↓ Ver detalhes</a>
+          <div class="plano-addons">
+            <label><input type="checkbox"> Desktop Móvel 15GB</label>
+            <label><input type="checkbox"> Desktop Móvel 20GB</label>
+          </div>
+          <div class="plano-preco">
+            <span class="moeda">R$</span>
+            <span class="valor">99,99</span>
+          </div>
+          <small class="plano-info">Por 6 meses. Após R$xxx/m</small>
+          <a href="#" class="btn-assinar destaque-btn">ASSINAR PLANO</a>
+        </div>
+
+        <div class="plano-card" data-categoria="internet">
+          <div class="plano-mega accent">400<span>MEGA</span></div>
+          <ul class="plano-features">
+            <li><strong>400 MEGA</strong> de download</li>
+            <li><strong>200 MEGA</strong> de upload</li>
+            <li>XX incluso</li>
+            <li>Apps de conteúdo com <strong>Watch</strong></li>
+          </ul>
+          <div class="plano-apps">
+            <span class="app-dot red"></span>
+            <span class="app-dot blue"></span>
+            <span class="app-dot green"></span>
+            <span class="app-dot purple"></span>
+          </div>
+          <a href="#" class="ver-detalhes">↓ Ver detalhes</a>
+          <div class="plano-addons">
+            <label><input type="checkbox"> Desktop Móvel 15GB</label>
+            <label><input type="checkbox"> Desktop Móvel 20GB</label>
+          </div>
+          <div class="plano-preco">
+            <span class="moeda">R$</span>
+            <span class="valor">XX,XX</span>
+          </div>
+          <small class="plano-info">Por X meses. Após R$xxx/m</small>
+          <a href="#" class="btn-assinar">ASSINAR PLANO</a>
+        </div>
+
+        <div class="plano-card" data-categoria="internet internet-celular">
+          <div class="plano-mega accent">700<span>MEGA</span></div>
+          <ul class="plano-features">
+            <li><strong>700 MEGA</strong> de download</li>
+            <li><strong>350 MEGA</strong> de upload</li>
+            <li>XX incluso</li>
+            <li>Apps de conteúdo com <strong>Watch</strong></li>
+          </ul>
+          <div class="plano-apps">
+            <span class="app-dot red"></span>
+            <span class="app-dot blue"></span>
+            <span class="app-dot green"></span>
+            <span class="app-dot purple"></span>
+          </div>
+          <a href="#" class="ver-detalhes">↓ Ver detalhes</a>
+          <div class="plano-addons">
+            <label><input type="checkbox"> Desktop Móvel 15GB</label>
+            <label><input type="checkbox"> Desktop Móvel 20GB</label>
+          </div>
+          <div class="plano-preco">
+            <span class="moeda">R$</span>
+            <span class="valor">XX,XX</span>
+          </div>
+          <small class="plano-info">Por X meses. Após R$xxx/m</small>
+          <a href="#" class="btn-assinar">ASSINAR PLANO</a>
+        </div>
+
+        <div class="plano-card" data-categoria="internet tv-internet planos-premium">
+          <div class="plano-mega accent">1<span>GIGA</span></div>
+          <ul class="plano-features">
+            <li><strong>1000 MEGA</strong> de download</li>
+            <li><strong>500 MEGA</strong> de upload</li>
+            <li>XX incluso</li>
+            <li>Apps de conteúdo com <strong>Watch</strong></li>
+          </ul>
+          <div class="plano-apps">
+            <span class="app-dot red"></span>
+            <span class="app-dot blue"></span>
+            <span class="app-dot green"></span>
+            <span class="app-dot purple"></span>
+          </div>
+          <a href="#" class="ver-detalhes">↓ Ver detalhes</a>
+          <div class="plano-addons">
+            <label><input type="checkbox"> Desktop Móvel 15GB</label>
+            <label><input type="checkbox"> Desktop Móvel 20GB</label>
+          </div>
+          <div class="plano-preco">
+            <span class="moeda">R$</span>
+            <span class="valor">XX,XX</span>
+          </div>
+          <small class="plano-info">Por X meses. Após R$xxx/m</small>
+          <a href="#" class="btn-assinar">ASSINAR PLANO</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-logo">
+        <span class="logo-flex">Flex</span><span class="logo-net">Net</span>
+        <span class="logo-sub">TELECOM</span>
+      </div>
+      <p class="footer-tagline">Internet rápida para sua casa, com as melhores operadoras.</p>
+      <div class="footer-links">
+        <a href="#">Política de Privacidade</a>
+        <a href="#">Termos de Uso</a>
+        <a href="#">Contato</a>
+      </div>
+      <p class="footer-copy">© 2025 FlexNet Telecom. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
