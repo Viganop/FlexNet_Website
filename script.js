@@ -134,7 +134,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // 6. SCROLL REVEAL — Intersection Observer
   // ——————————————————————————————————————
   const revealEls = document.querySelectorAll(
-    '.logo-card, .plano-card, .strip-inner, .operadoras-strip'
+    '.logo-card, .plano-card, .metrica-item, .passo, .dor-item, .solucao-card, .contato-card'
   );
 
   const observer = new IntersectionObserver((entries) => {
@@ -155,26 +155,16 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // ——————————————————————————————————————
-  // 7. BOTÕES "VER DETALHES" — toggle detalhes extras
+  // 7. BOTÕES "VER DETALHES" — toggle addons
   // ——————————————————————————————————————
   document.querySelectorAll('.ver-detalhes').forEach(btn => {
     btn.addEventListener('click', (e) => {
       e.preventDefault();
-      const card    = btn.closest('.plano-card');
-      const addons  = card.querySelector('.plano-addons');
-      const isOpen  = addons.style.display === 'none' || addons.style.display === '';
-
-      if (addons.style.maxHeight && addons.style.maxHeight !== '0px') {
-        addons.style.maxHeight  = '0px';
-        addons.style.overflow   = 'hidden';
-        addons.style.paddingTop = '0';
-        btn.textContent         = '↓ Ver detalhes';
-      } else {
-        addons.style.maxHeight  = '200px';
-        addons.style.overflow   = 'visible';
-        addons.style.paddingTop = '12px';
-        btn.textContent         = '↑ Ocultar detalhes';
-      }
+      const card   = btn.closest('.plano-card');
+      const addons = card.querySelector('.plano-addons');
+      const isOpen = addons.classList.contains('open');
+      addons.classList.toggle('open');
+      btn.textContent = isOpen ? 'Ver opções adicionais ↓' : 'Ocultar opções ↑';
     });
   });
 
@@ -193,6 +183,20 @@ document.addEventListener('DOMContentLoaded', () => {
       }, 2000);
     });
   });
+
+  // ——————————————————————————————————————
+  // 9. PILARES — anima barra ao entrar na tela
+  // ——————————————————————————————————————
+  const pilarObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        pilarObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.3 });
+
+  document.querySelectorAll('.pilar').forEach(el => pilarObserver.observe(el));
 
   console.log('FlexNet Telecom — script carregado com sucesso ✔');
 });
