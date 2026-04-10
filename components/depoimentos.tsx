@@ -40,21 +40,19 @@ export function Depoimentos() {
   const depoimento = DEPOIMENTOS[currentIndex];
 
   return (
-    <section className="py-24 relative overflow-hidden">
-      <div className="container mx-auto px-4">
+    <section className="relative overflow-hidden">
+      {/* Fundo azul cobalto sólido */}
+      <div className="absolute inset-0 bg-[#0a1628]" />
+
+      <div className="container mx-auto px-4 relative z-10 py-12">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <span className="text-primary text-sm font-medium uppercase tracking-wider">
+        <div className="text-center max-w-3xl mx-auto mt-6 mb-8">
+          <span className="text-primary text-xs font-semibold uppercase tracking-[0.2em]">
             Depoimentos
           </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mt-4 mb-6 text-balance">
-            O que nossos clientes{' '}
-            <span className="gradient-text">dizem</span>
+          <h2 className="text-2xl sm:text-3xl font-bold mt-3 text-white">
+            Avaliações
           </h2>
-          <p className="text-muted-foreground text-lg leading-relaxed">
-            A satisfação dos nossos clientes é nossa maior conquista. 
-            Veja o que eles têm a dizer.
-          </p>
         </div>
 
         {/* Carousel */}
@@ -64,7 +62,7 @@ export function Depoimentos() {
             variant="outline"
             size="icon"
             onClick={handlePrev}
-            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 sm:-translate-x-16 z-10 w-12 h-12 rounded-full border-border bg-background/80 backdrop-blur-sm hover:bg-secondary hover:border-primary"
+            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 sm:-translate-x-16 z-10 w-12 h-12 rounded-full border-white/20 bg-white/10 backdrop-blur-sm hover:bg-white/20 hover:border-white/40 text-white"
             aria-label="Depoimento anterior"
           >
             <ChevronLeft className="w-6 h-6" />
@@ -74,7 +72,7 @@ export function Depoimentos() {
             variant="outline"
             size="icon"
             onClick={handleNext}
-            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 sm:translate-x-16 z-10 w-12 h-12 rounded-full border-border bg-background/80 backdrop-blur-sm hover:bg-secondary hover:border-primary"
+            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 sm:translate-x-16 z-10 w-12 h-12 rounded-full border-white/20 bg-white/10 backdrop-blur-sm hover:bg-white/20 hover:border-white/40 text-white"
             aria-label="Próximo depoimento"
           >
             <ChevronRight className="w-6 h-6" />
@@ -89,7 +87,7 @@ export function Depoimentos() {
             }`}
           >
             {/* Quote Icon */}
-            <Quote className="w-14 h-14 text-primary/40 mx-auto mb-6" />
+            <Quote className="w-14 h-14 text-white/30 mx-auto mb-6" />
 
             {/* Rating */}
             <div className="flex justify-center gap-1 mb-6">

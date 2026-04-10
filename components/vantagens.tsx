@@ -29,16 +29,6 @@ export function Vantagens() {
           </p>
         </div>
 
-        {/* Manifesto Card */}
-        <div className="glass-card rounded-3xl p-8 lg:p-12 mb-16 max-w-4xl mx-auto gradient-border">
-          <blockquote className="text-xl sm:text-2xl lg:text-3xl font-medium text-center leading-relaxed text-foreground">
-            &ldquo;Acreditamos que internet de qualidade não deveria ser luxo. 
-            Por isso, entregamos <span className="gradient-text">velocidade real</span>, 
-            cobramos <span className="gradient-text">preço justo</span> e tratamos 
-            você como <span className="gradient-text">gente de verdade</span>.&rdquo;
-          </blockquote>
-        </div>
-
         {/* Pilares Grid */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {PILARES.map((pilar, index) => (

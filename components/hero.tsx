@@ -1,6 +1,5 @@
 'use client';
 
-import Image from 'next/image';
 import { ArrowRight, Play, Zap } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { WHATSAPP_NUMBER } from '@/lib/constants';
@@ -12,17 +11,18 @@ export function Hero() {
 
   return (
     <section id="inicio" className="relative min-h-screen flex items-center overflow-hidden">
-      {/* Background Image */}
+      {/* Background Video */}
       <div className="absolute inset-0">
-        <Image
-          src="/images/hero-bg.jpg"
-          alt="Conexões globais de internet"
-          fill
-          className="object-cover object-center"
-          priority
-        />
-        {/* Dark overlay for better text readability */}
-        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/90 to-background/40" />
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover object-center"
+        >
+          <source src="/videos/hero-bg.mp4" type="video/mp4" />
+        </video>
+        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/75 to-background/25" />
         <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/50" />
       </div>
 
@@ -68,25 +68,6 @@ export function Hero() {
             </Button>
           </div>
 
-          {/* Speed Indicator */}
-          <div className="glass-card rounded-2xl p-6 sm:p-8 inline-block">
-            <div className="flex items-center gap-6 sm:gap-10">
-              <div className="text-center">
-                <div className="text-3xl sm:text-4xl font-bold gradient-text">1</div>
-                <div className="text-sm text-muted-foreground mt-1">Gbps</div>
-              </div>
-              <div className="h-10 w-px bg-border" />
-              <div className="text-center">
-                <div className="text-3xl sm:text-4xl font-bold text-foreground">R$79</div>
-                <div className="text-sm text-muted-foreground mt-1">a partir de</div>
-              </div>
-              <div className="h-10 w-px bg-border" />
-              <div className="text-center">
-                <div className="text-3xl sm:text-4xl font-bold text-foreground">0</div>
-                <div className="text-sm text-muted-foreground mt-1">fidelidade</div>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
 

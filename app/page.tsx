@@ -5,7 +5,6 @@ import { Vantagens } from '@/components/vantagens';
 import { Planos } from '@/components/planos';
 import { ComoFunciona } from '@/components/como-funciona';
 import { Depoimentos } from '@/components/depoimentos';
-import { FAQ } from '@/components/faq';
 import { Contato } from '@/components/contato';
 import { Footer } from '@/components/footer';
 
@@ -19,7 +18,6 @@ export default function Home() {
       <Planos />
       <ComoFunciona />
       <Depoimentos />
-      <FAQ />
       <Contato />
       <Footer />
     </main>

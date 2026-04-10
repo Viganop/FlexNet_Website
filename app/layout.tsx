@@ -4,9 +4,10 @@ import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 
 const inter = Inter({ 
-  subsets: ["latin"],
-  variable: '--font-inter'
-});
+  subsets: ['latin'],
+  variable: '--font-inter',
+  display: 'swap',
+})
 
 export const metadata: Metadata = {
   title: 'FlexNet Telecom | Internet Fibra Óptica de Alta Velocidade',
