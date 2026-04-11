@@ -1,16 +1,13 @@
 'use client';
 
-import { Star, Quote } from 'lucide-react';
+import { Star } from 'lucide-react';
 import { DEPOIMENTOS } from '@/lib/constants';
 
 export function Depoimentos() {
   return (
     <section className="py-24 relative overflow-hidden">
-      {/* Background Effects */}
-      <div className="absolute inset-0">
-        <div className="absolute top-1/2 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-primary/3 rounded-full blur-3xl" />
-      </div>
+      {/* Background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-secondary/20 to-transparent" />
 
       <div className="container mx-auto px-4 relative z-10">
 
@@ -20,8 +17,8 @@ export function Depoimentos() {
             Depoimentos
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mt-4 mb-6 text-balance">
-            O que nossos clientes{' '}
-            <span className="gradient-text">dizem</span>
+            O que dizem{' '}
+            <span className="gradient-text">nossos clientes</span>
           </h2>
           <p className="text-muted-foreground text-lg leading-relaxed">
             Mais de 2.000 clientes satisfeitos em toda a nossa area de cobertura.
@@ -30,17 +27,11 @@ export function Depoimentos() {
 
         {/* Grid de cards */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
-          {DEPOIMENTOS.map((dep, index) => (
+          {DEPOIMENTOS.map((dep) => (
             <div
               key={dep.id}
-              className="group glass-card rounded-2xl p-6 hover:glow transition-all duration-500 hover:-translate-y-2"
-              style={{ animationDelay: `${index * 100}ms` }}
+              className="p-6 rounded-2xl bg-secondary/30 border border-border/50 hover:border-primary/30 transition-all duration-300"
             >
-              {/* Quote decorativo */}
-              <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-5 group-hover:bg-primary/20 transition-colors">
-                <Quote className="w-6 h-6 text-primary" />
-              </div>
-
               {/* Estrelas */}
               <div className="flex gap-1 mb-4">
                 {[...Array(dep.rating)].map((_, i) => (
@@ -49,20 +40,20 @@ export function Depoimentos() {
               </div>
 
               {/* Texto */}
-              <p className="text-muted-foreground leading-relaxed mb-6 flex-1">
+              <p className="text-muted-foreground leading-relaxed mb-6">
                 &ldquo;{dep.texto}&rdquo;
               </p>
 
               {/* Autor */}
-              <div className="flex items-center gap-3 pt-4 border-t border-border">
-                <div className="w-10 h-10 rounded-full bg-primary/15 border border-primary/20 flex items-center justify-center text-primary font-bold shrink-0">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary font-semibold shrink-0">
                   {dep.nome.charAt(0)}
                 </div>
                 <div>
-                  <div className="text-foreground font-semibold leading-tight">
+                  <div className="text-foreground font-medium text-sm">
                     {dep.nome}
                   </div>
-                  <div className="text-muted-foreground text-sm mt-0.5">
+                  <div className="text-muted-foreground text-xs">
                     {dep.cidade}
                   </div>
                 </div>
