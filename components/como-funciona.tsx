@@ -1,17 +1,20 @@
 'use client';
 
-import { MousePointer, Calendar, Wifi } from 'lucide-react';
+import { MousePointer, Calendar, Wifi, ArrowRight } from 'lucide-react';
 import { PASSOS } from '@/lib/constants';
 
 const iconMap: Record<string, React.ReactNode> = {
-  '01': <MousePointer className="w-5 h-5" />,
-  '02': <Calendar className="w-5 h-5" />,
-  '03': <Wifi className="w-5 h-5" />,
+  '01': <MousePointer className="w-6 h-6" />,
+  '02': <Calendar className="w-6 h-6" />,
+  '03': <Wifi className="w-6 h-6" />,
 };
 
 export function ComoFunciona() {
   return (
     <section className="py-24 relative overflow-hidden">
+      {/* Background sutil */}
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-secondary/20 to-transparent" />
+      
       <div className="container mx-auto px-4 relative z-10">
 
         {/* Header */}
@@ -28,57 +31,51 @@ export function ComoFunciona() {
           </p>
         </div>
 
-        {/* Timeline Layout */}
-        <div className="max-w-4xl mx-auto relative">
-          {/* Linha central - desktop */}
-          <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-primary/50 via-primary/30 to-primary/50" />
-
-          <div className="space-y-12 md:space-y-0">
-            {PASSOS.map((passo, index) => {
-              const isEven = index % 2 === 0;
-              
-              return (
-                <div 
-                  key={passo.numero} 
-                  className={`relative md:flex md:items-center ${isEven ? 'md:flex-row' : 'md:flex-row-reverse'}`}
-                >
-                  {/* Conteudo */}
-                  <div className={`md:w-1/2 ${isEven ? 'md:pr-16 md:text-right' : 'md:pl-16 md:text-left'}`}>
-                    <div className="group">
-                      {/* Numero grande */}
-                      <span className="text-8xl lg:text-9xl font-bold text-primary/10 leading-none block mb-2">
-                        {passo.numero}
-                      </span>
-                      
-                      {/* Titulo com icone */}
-                      <div className={`flex items-center gap-3 mb-3 ${isEven ? 'md:justify-end' : 'md:justify-start'}`}>
-                        <div className={`w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary ${isEven ? 'md:order-2' : ''}`}>
-                          {iconMap[passo.numero]}
-                        </div>
-                        <h3 className="text-2xl font-semibold text-foreground">
-                          {passo.titulo}
-                        </h3>
-                      </div>
-                      
-                      <p className="text-muted-foreground leading-relaxed text-lg">
-                        {passo.descricao}
-                      </p>
+        {/* Steps - Layout horizontal fluido */}
+        <div className="max-w-5xl mx-auto">
+          <div className="flex flex-col lg:flex-row lg:items-start gap-8 lg:gap-0">
+            {PASSOS.map((passo, index) => (
+              <div key={passo.numero} className="flex-1 flex flex-col lg:flex-row items-center">
+                {/* Step content */}
+                <div className="flex-1 text-center lg:px-6">
+                  {/* Numero grande de fundo */}
+                  <div className="relative inline-block mb-4">
+                    <span className="text-[120px] lg:text-[150px] font-bold text-primary/10 leading-none select-none">
+                      {passo.numero}
+                    </span>
+                    {/* Icone centralizado */}
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 rounded-full bg-primary/10 border-2 border-primary/30 flex items-center justify-center text-primary">
+                      {iconMap[passo.numero]}
                     </div>
                   </div>
-
-                  {/* Ponto central na linha - desktop */}
-                  <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 w-5 h-5 rounded-full bg-primary border-4 border-background z-10" />
-
-                  {/* Espaco vazio do outro lado - desktop */}
-                  <div className="hidden md:block md:w-1/2" />
-
-                  {/* Linha conectora - mobile */}
-                  {index < PASSOS.length - 1 && (
-                    <div className="md:hidden w-px h-8 bg-primary/30 mx-auto my-4" />
-                  )}
+                  
+                  <h3 className="text-xl font-semibold text-foreground mb-3">
+                    {passo.titulo}
+                  </h3>
+                  <p className="text-muted-foreground leading-relaxed max-w-[280px] mx-auto">
+                    {passo.descricao}
+                  </p>
                 </div>
-              );
-            })}
+
+                {/* Seta entre steps - desktop */}
+                {index < PASSOS.length - 1 && (
+                  <div className="hidden lg:flex items-center justify-center shrink-0 -mx-4">
+                    <div className="w-12 h-12 rounded-full bg-secondary/50 border border-primary/20 flex items-center justify-center">
+                      <ArrowRight className="w-5 h-5 text-primary" />
+                    </div>
+                  </div>
+                )}
+
+                {/* Seta entre steps - mobile */}
+                {index < PASSOS.length - 1 && (
+                  <div className="lg:hidden flex justify-center py-4">
+                    <div className="w-10 h-10 rounded-full bg-secondary/50 border border-primary/20 flex items-center justify-center rotate-90">
+                      <ArrowRight className="w-4 h-4 text-primary" />
+                    </div>
+                  </div>
+                )}
+              </div>
+            ))}
           </div>
         </div>
 
