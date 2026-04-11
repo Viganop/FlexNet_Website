@@ -58,7 +58,7 @@ export function Navbar() {
         <div className="hidden lg:block">
           <Button 
             onClick={handleWhatsApp}
-            className="bg-primary text-primary-foreground hover:bg-primary/90 glow"
+            className="bg-primary text-primary-foreground hover:bg-primary/90 glow text-base px-6 py-5 font-semibold"
           >
             Assine Agora
           </Button>
@@ -93,7 +93,7 @@ export function Navbar() {
           ))}
           <Button 
             onClick={handleWhatsApp}
-            className="bg-primary text-primary-foreground hover:bg-primary/90 w-full mt-4"
+            className="bg-primary text-primary-foreground hover:bg-primary/90 w-full mt-4 text-base py-5 font-semibold"
           >
             Assine Agora
           </Button>

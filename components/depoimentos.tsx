@@ -1,52 +1,18 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { Star, Quote, ChevronLeft, ChevronRight } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { Star, Quote } from 'lucide-react';
 import { DEPOIMENTOS } from '@/lib/constants';
 
 export function Depoimentos() {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isAnimating, setIsAnimating] = useState(false);
-  const [direction, setDirection] = useState<'left' | 'right'>('right');
-
-  const handlePrev = () => {
-    if (isAnimating) return;
-    setDirection('left');
-    setIsAnimating(true);
-  };
-
-  const handleNext = () => {
-    if (isAnimating) return;
-    setDirection('right');
-    setIsAnimating(true);
-  };
-
-  useEffect(() => {
-    if (isAnimating) {
-      const timer = setTimeout(() => {
-        setCurrentIndex((prev) => {
-          if (direction === 'right') {
-            return prev === DEPOIMENTOS.length - 1 ? 0 : prev + 1;
-          }
-          return prev === 0 ? DEPOIMENTOS.length - 1 : prev - 1;
-        });
-        setIsAnimating(false);
-      }, 300);
-      return () => clearTimeout(timer);
-    }
-  }, [isAnimating, direction]);
-
-  const depoimento = DEPOIMENTOS[currentIndex];
-
   return (
-    <section className="relative overflow-hidden">
+    <section className="relative overflow-hidden py-20">
       {/* Fundo azul cobalto sólido */}
       <div className="absolute inset-0 bg-[#0a1628]" />
 
-      <div className="container mx-auto px-4 relative z-10 py-12">
-        {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mt-6 mb-8">
+      <div className="container mx-auto px-4 relative z-10">
+
+        {/* Header */}
+        <div className="text-center mb-12">
           <span className="text-primary text-xs font-semibold uppercase tracking-[0.2em]">
             Depoimentos
           </span>
@@ -55,100 +21,46 @@ export function Depoimentos() {
           </h2>
         </div>
 
-        {/* Carousel */}
-        <div className="max-w-3xl mx-auto relative">
-          {/* Navigation Buttons */}
-          <Button
-            variant="outline"
-            size="icon"
-            onClick={handlePrev}
-            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 sm:-translate-x-16 z-10 w-12 h-12 rounded-full border-white/20 bg-white/10 backdrop-blur-sm hover:bg-white/20 hover:border-white/40 text-white"
-            aria-label="Depoimento anterior"
-          >
-            <ChevronLeft className="w-6 h-6" />
-          </Button>
+        {/* Grid de cards */}
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 max-w-6xl mx-auto">
+          {DEPOIMENTOS.map((dep) => (
+            <div
+              key={dep.id}
+              className="group relative flex flex-col gap-4 rounded-2xl p-6 bg-white/[0.04] border border-white/[0.08] hover:border-primary/30 hover:bg-white/[0.07] transition-all duration-300"
+            >
+              {/* Quote decorativo */}
+              <Quote className="w-7 h-7 text-primary/30 shrink-0" />
 
-          <Button
-            variant="outline"
-            size="icon"
-            onClick={handleNext}
-            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 sm:translate-x-16 z-10 w-12 h-12 rounded-full border-white/20 bg-white/10 backdrop-blur-sm hover:bg-white/20 hover:border-white/40 text-white"
-            aria-label="Próximo depoimento"
-          >
-            <ChevronRight className="w-6 h-6" />
-          </Button>
-
-          {/* Testimonial Content - No Card */}
-          <div 
-            className={`text-center px-4 sm:px-12 py-8 transition-all duration-300 ease-out ${
-              isAnimating 
-                ? `opacity-0 ${direction === 'right' ? '-translate-x-8' : 'translate-x-8'}` 
-                : 'opacity-100 translate-x-0'
-            }`}
-          >
-            {/* Quote Icon */}
-            <Quote className="w-14 h-14 text-white/30 mx-auto mb-6" />
-
-            {/* Rating */}
-            <div className="flex justify-center gap-1 mb-6">
-              {[...Array(5)].map((_, i) => (
-                <Star
-                  key={i}
-                  className={`w-6 h-6 transition-all duration-300 ${
-                    i < depoimento.rating
-                      ? 'text-primary fill-primary'
-                      : 'text-muted-foreground/30'
-                  }`}
-                />
-              ))}
-            </div>
-
-            {/* Text */}
-            <p className="text-foreground text-xl sm:text-2xl leading-relaxed mb-10 italic max-w-2xl mx-auto">
-              &ldquo;{depoimento.texto}&rdquo;
-            </p>
-
-            {/* Author */}
-            <div className="flex flex-col items-center gap-4">
-              <div className="w-20 h-20 rounded-full bg-gradient-to-br from-primary/30 to-primary/10 flex items-center justify-center text-primary font-semibold text-3xl border-2 border-primary/20">
-                {depoimento.nome.charAt(0)}
+              {/* Estrelas */}
+              <div className="flex gap-0.5">
+                {[...Array(dep.rating)].map((_, i) => (
+                  <Star key={i} className="w-4 h-4 text-primary fill-primary" />
+                ))}
               </div>
-              <div>
-                <div className="font-semibold text-foreground text-xl">
-                  {depoimento.nome}
+
+              {/* Texto */}
+              <p className="text-white/70 text-sm leading-relaxed flex-1">
+                &ldquo;{dep.texto}&rdquo;
+              </p>
+
+              {/* Autor */}
+              <div className="flex items-center gap-3 pt-2 border-t border-white/[0.07]">
+                <div className="w-9 h-9 rounded-full bg-primary/15 border border-primary/20 flex items-center justify-center text-primary font-bold text-sm shrink-0">
+                  {dep.nome.charAt(0)}
                 </div>
-                <div className="text-sm text-muted-foreground mt-1">
-                  {depoimento.cidade}
+                <div>
+                  <div className="text-white text-sm font-semibold leading-tight">
+                    {dep.nome}
+                  </div>
+                  <div className="text-white/40 text-xs mt-0.5">
+                    {dep.cidade}
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-
-          {/* Dots Indicator */}
-          <div className="flex justify-center gap-2 mt-8">
-            {DEPOIMENTOS.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => {
-                  if (index !== currentIndex && !isAnimating) {
-                    setDirection(index > currentIndex ? 'right' : 'left');
-                    setIsAnimating(true);
-                    setTimeout(() => {
-                      setCurrentIndex(index);
-                      setIsAnimating(false);
-                    }, 300);
-                  }
-                }}
-                className={`h-3 rounded-full transition-all duration-300 ${
-                  index === currentIndex
-                    ? 'bg-primary w-8'
-                    : 'bg-muted-foreground/30 hover:bg-muted-foreground/50 w-3'
-                }`}
-                aria-label={`Ir para depoimento ${index + 1}`}
-              />
-            ))}
-          </div>
+          ))}
         </div>
+
       </div>
     </section>
   );
