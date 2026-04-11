@@ -14,8 +14,8 @@ export default function Home() {
       <Navbar />
       <Hero />
       <Metricas />
-      <Vantagens />
       <Planos />
+      <Vantagens />
       <ComoFunciona />
       <Depoimentos />
       <Contato />

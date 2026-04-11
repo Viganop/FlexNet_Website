@@ -1,24 +1,16 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { ArrowRight, Play, Zap } from 'lucide-react';
+import { ArrowRight, Play } from 'lucide-react';
 import { motion } from 'motion/react';
 import { Button } from '@/components/ui/button';
-import BlurText from '@/components/ui/blur-text';
 import { WHATSAPP_NUMBER } from '@/lib/constants';
 
 export function Hero() {
-  const [showHeadline, setShowHeadline] = useState(false);
-  const [showSub,      setShowSub]      = useState(false);
-  const [showBtns,     setShowBtns]     = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    // headline: 4 palavras × 150ms + 500ms = ~1100ms
-    // sub começa logo depois
-    setShowHeadline(true);
-    const t1 = setTimeout(() => setShowSub(true),  1200);
-    const t2 = setTimeout(() => setShowBtns(true), 3000);
-    return () => { clearTimeout(t1); clearTimeout(t2); };
+    setIsVisible(true);
   }, []);
 
   const handleWhatsApp = () => {
@@ -26,88 +18,105 @@ export function Hero() {
   };
 
   return (
-    <section id="inicio" className="relative min-h-screen flex items-center overflow-hidden">
-      {/* Background Video */}
+    <section id="inicio" className="relative min-h-screen flex items-center overflow-hidden pt-20">
+      {/* Background Effects */}
       <div className="absolute inset-0">
-        <video autoPlay loop muted playsInline
-          className="absolute inset-0 w-full h-full object-cover object-center">
-          <source src="/videos/hero-bg.mp4" type="video/mp4" />
-        </video>
-        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/90 to-background/40" />
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/50" />
+        <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[120px]" />
+        <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-primary/5 rounded-full blur-[100px]" />
       </div>
 
-      <div className="container mx-auto px-4 pt-24 pb-12 relative z-10">
-        <div className="max-w-2xl text-left">
+      <div className="container mx-auto px-4 py-20 relative z-10">
+        <div className="max-w-5xl mx-auto">
+          
+          {/* Main Content */}
+          <div className="text-center mb-16">
+            {/* Badge */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={isVisible ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5 }}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-8"
+            >
+              <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+              <span className="text-sm text-muted-foreground">Fibra optica de verdade</span>
+            </motion.div>
 
-          {/* Badge */}
+            {/* Headline */}
+            <motion.h1
+              initial={{ opacity: 0, y: 30 }}
+              animate={isVisible ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.1] mb-8 text-balance"
+            >
+              Internet de alta velocidade{' '}
+              <span className="gradient-text">para sua casa</span>
+            </motion.h1>
+
+            {/* Subheadline */}
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={isVisible ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto mb-12 leading-relaxed"
+            >
+              Velocidade real, estabilidade garantida e suporte humano 24 horas. 
+              Sem surpresas, sem fidelidade. A partir de R$ 79,90/mes.
+            </motion.p>
+
+            {/* CTAs */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={isVisible ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="flex flex-col sm:flex-row items-center justify-center gap-4"
+            >
+              <Button 
+                size="lg" 
+                onClick={handleWhatsApp}
+                className="bg-primary text-primary-foreground hover:bg-primary/90 text-lg px-8 py-6 group"
+              >
+                Assinar agora
+                <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
+              </Button>
+              <Button 
+                size="lg" 
+                variant="outline"
+                onClick={() => document.getElementById('planos')?.scrollIntoView({ behavior: 'smooth' })}
+                className="border-border hover:bg-secondary text-foreground text-lg px-8 py-6"
+              >
+                <Play className="w-5 h-5 mr-2 text-primary" />
+                Ver planos
+              </Button>
+            </motion.div>
+          </div>
+
+          {/* Stats Row */}
           <motion.div
-            initial={{ opacity: 0, y: -16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, ease: 'easeOut' }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card mb-8"
+            initial={{ opacity: 0, y: 30 }}
+            animate={isVisible ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-4 pt-12 border-t border-border/50"
           >
-            <Zap className="w-4 h-4 text-primary" />
-            <span className="text-sm text-muted-foreground">Internet Fibra 100% Real</span>
-          </motion.div>
-
-          {/* Headline — todas as palavras num único BlurText */}
-          <BlurText
-            text="Conexão que nunca para"
-            delay={150}
-            duration={0.5}
-            animateBy="words"
-            direction="top"
-            visible={showHeadline}
-            gradientFrom={2} /* palavras 0-1 brancas, 2-3 com gradient */
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6"
-          />
-
-          {/* Subheadline */}
-          <BlurText
-            text="Internet fibra óptica de verdade. Velocidade real, estabilidade garantida e suporte humano 24 horas. Sem surpresas, sem fidelidade."
-            delay={35}
-            duration={0.4}
-            animateBy="words"
-            direction="bottom"
-            visible={showSub}
-            className="text-lg sm:text-xl text-muted-foreground max-w-xl mb-10 leading-relaxed"
-          />
-
-          {/* Botões */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={showBtns ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.6, ease: 'easeOut' }}
-            className="flex flex-col sm:flex-row items-start gap-4 mb-12"
-          >
-            <Button size="lg" onClick={handleWhatsApp}
-              className="bg-primary text-primary-foreground hover:bg-primary/90 glow text-xl px-12 py-7 group">
-              Ver Planos
-              <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
-            </Button>
-            <Button size="lg" variant="outline"
-              className="border-border hover:bg-secondary text-foreground text-lg px-8 py-6 group"
-              onClick={() => document.getElementById('vantagens')?.scrollIntoView({ behavior: 'smooth' })}>
-              <Play className="w-5 h-5 mr-2 text-primary" />
-              Por que FlexNet?
-            </Button>
+            <div className="text-center">
+              <div className="text-3xl sm:text-4xl font-bold text-foreground mb-1">2.000+</div>
+              <div className="text-sm text-muted-foreground">Clientes satisfeitos</div>
+            </div>
+            <div className="text-center">
+              <div className="text-3xl sm:text-4xl font-bold text-foreground mb-1">99.9%</div>
+              <div className="text-sm text-muted-foreground">Uptime garantido</div>
+            </div>
+            <div className="text-center">
+              <div className="text-3xl sm:text-4xl font-bold text-foreground mb-1">24/7</div>
+              <div className="text-sm text-muted-foreground">Suporte disponivel</div>
+            </div>
+            <div className="text-center">
+              <div className="text-3xl sm:text-4xl font-bold text-foreground mb-1">1 Gbps</div>
+              <div className="text-sm text-muted-foreground">Velocidade maxima</div>
+            </div>
           </motion.div>
 
         </div>
       </div>
-
-      {/* Scroll Indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: showBtns ? 1 : 0 }}
-        transition={{ duration: 0.8 }}
-        className="absolute bottom-8 left-8 sm:left-1/2 sm:-translate-x-1/2 animate-bounce"
-      >
-        <div className="w-6 h-10 rounded-full border-2 border-muted-foreground/30 flex items-start justify-center p-2">
-          <div className="w-1.5 h-3 rounded-full bg-primary animate-pulse" />
-        </div>
-      </motion.div>
     </section>
   );
 }
