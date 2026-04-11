@@ -1,15 +1,17 @@
 'use client';
 
-import { MousePointer, Calendar, Wifi, ArrowRight } from 'lucide-react';
+import { MousePointer, Calendar, Wifi } from 'lucide-react';
 import { PASSOS } from '@/lib/constants';
 
 const iconMap: Record<string, React.ReactNode> = {
   '01': <MousePointer className="w-6 h-6" />,
   '02': <Calendar className="w-6 h-6" />,
-  '03': <Wifi className="w-6 h-6" />,
+  '03': <Wifi className="w-7 h-7" />,
 };
 
 export function ComoFunciona() {
+  const isLastStep = (index: number) => index === PASSOS.length - 1;
+
   return (
     <section className="py-24 relative overflow-hidden">
       {/* Background sutil */}
@@ -31,49 +33,61 @@ export function ComoFunciona() {
           </p>
         </div>
 
-        {/* Steps - Layout horizontal fluido */}
-        <div className="max-w-5xl mx-auto">
-          <div className="flex flex-col lg:flex-row lg:items-start gap-8 lg:gap-0">
+        {/* Steps - Layout horizontal com linha tracejada */}
+        <div className="max-w-4xl mx-auto">
+          {/* Container dos steps */}
+          <div className="relative flex flex-col lg:flex-row lg:items-start lg:justify-between gap-12 lg:gap-8">
+            
+            {/* Linha tracejada horizontal - desktop */}
+            <div className="hidden lg:block absolute top-10 left-[15%] right-[15%] border-t-2 border-dashed border-primary/40" />
+            
+            {/* Linha tracejada vertical - mobile */}
+            <div className="lg:hidden absolute left-1/2 -translate-x-1/2 top-[80px] bottom-[80px] border-l-2 border-dashed border-primary/40" />
+
             {PASSOS.map((passo, index) => (
-              <div key={passo.numero} className="flex-1 flex flex-col lg:flex-row items-center">
-                {/* Step content */}
-                <div className="flex-1 text-center lg:px-6">
-                  {/* Numero grande de fundo */}
-                  <div className="relative inline-block mb-4">
-                    <span className="text-[120px] lg:text-[150px] font-bold text-primary/10 leading-none select-none">
-                      {passo.numero}
-                    </span>
-                    {/* Icone centralizado */}
-                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 rounded-full bg-primary/10 border-2 border-primary/30 flex items-center justify-center text-primary">
-                      {iconMap[passo.numero]}
-                    </div>
-                  </div>
+              <div key={passo.numero} className="flex-1 flex flex-col items-center text-center relative z-10">
+                {/* Circulo com icone */}
+                <div className={`
+                  relative mb-6
+                  ${isLastStep(index) ? 'scale-110' : ''}
+                `}>
+                  {/* Glow effect para o ultimo */}
+                  {isLastStep(index) && (
+                    <div className="absolute inset-0 w-20 h-20 -translate-x-0 -translate-y-0 rounded-full bg-primary/30 blur-xl animate-pulse" />
+                  )}
                   
-                  <h3 className="text-xl font-semibold text-foreground mb-3">
-                    {passo.titulo}
-                  </h3>
-                  <p className="text-muted-foreground leading-relaxed max-w-[280px] mx-auto">
-                    {passo.descricao}
-                  </p>
+                  {/* Circulo principal */}
+                  <div className={`
+                    relative w-20 h-20 rounded-full flex items-center justify-center transition-all duration-300
+                    ${isLastStep(index) 
+                      ? 'bg-primary text-primary-foreground shadow-lg shadow-primary/50 ring-4 ring-primary/30' 
+                      : 'bg-secondary/80 border-2 border-primary/30 text-primary'
+                    }
+                  `}>
+                    {iconMap[passo.numero]}
+                  </div>
+
+                  {/* Badge do numero */}
+                  <span className={`
+                    absolute -bottom-1 -right-1 w-7 h-7 rounded-full text-xs font-bold flex items-center justify-center
+                    ${isLastStep(index)
+                      ? 'bg-foreground text-background'
+                      : 'bg-primary/20 text-primary border border-primary/30'
+                    }
+                  `}>
+                    {passo.numero}
+                  </span>
                 </div>
-
-                {/* Seta entre steps - desktop */}
-                {index < PASSOS.length - 1 && (
-                  <div className="hidden lg:flex items-center justify-center shrink-0 -mx-4">
-                    <div className="w-12 h-12 rounded-full bg-secondary/50 border border-primary/20 flex items-center justify-center">
-                      <ArrowRight className="w-5 h-5 text-primary" />
-                    </div>
-                  </div>
-                )}
-
-                {/* Seta entre steps - mobile */}
-                {index < PASSOS.length - 1 && (
-                  <div className="lg:hidden flex justify-center py-4">
-                    <div className="w-10 h-10 rounded-full bg-secondary/50 border border-primary/20 flex items-center justify-center rotate-90">
-                      <ArrowRight className="w-4 h-4 text-primary" />
-                    </div>
-                  </div>
-                )}
+                
+                <h3 className={`
+                  text-xl font-semibold mb-3 transition-colors
+                  ${isLastStep(index) ? 'text-primary' : 'text-foreground'}
+                `}>
+                  {passo.titulo}
+                </h3>
+                <p className="text-muted-foreground leading-relaxed max-w-[250px]">
+                  {passo.descricao}
+                </p>
               </div>
             ))}
           </div>

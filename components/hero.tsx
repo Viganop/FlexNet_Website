@@ -1,16 +1,25 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { ArrowRight, Play, Zap } from 'lucide-react';
-import { motion } from 'motion/react';
+import { useState, useEffect, useRef } from 'react';
+import { ArrowRight, MapPin, ChevronDown, Zap } from 'lucide-react';
+import { motion, AnimatePresence } from 'motion/react';
 import { Button } from '@/components/ui/button';
 import BlurText from '@/components/ui/blur-text';
 import { WHATSAPP_NUMBER } from '@/lib/constants';
+
+const CIDADES = [
+  { id: 'sao-carlos', nome: 'Sao Carlos' },
+  { id: 'ibate', nome: 'Ibate' },
+  { id: 'araraquara', nome: 'Araraquara' },
+];
 
 export function Hero() {
   const [showHeadline, setShowHeadline] = useState(false);
   const [showSub,      setShowSub]      = useState(false);
   const [showBtns,     setShowBtns]     = useState(false);
+  const [cidadeSelecionada, setCidadeSelecionada] = useState(CIDADES[0]);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     // headline: 4 palavras × 150ms + 500ms = ~1100ms
@@ -19,6 +28,17 @@ export function Hero() {
     const t1 = setTimeout(() => setShowSub(true),  1200);
     const t2 = setTimeout(() => setShowBtns(true), 3000);
     return () => { clearTimeout(t1); clearTimeout(t2); };
+  }, []);
+
+  // Fechar dropdown ao clicar fora
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setDropdownOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
   const handleWhatsApp = () => {
@@ -86,12 +106,45 @@ export function Hero() {
               Ver Planos
               <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
             </Button>
-            <Button size="lg" variant="outline"
-              className="border-border hover:bg-secondary text-foreground text-lg px-8 py-6 group"
-              onClick={() => document.getElementById('vantagens')?.scrollIntoView({ behavior: 'smooth' })}>
-              <Play className="w-5 h-5 mr-2 text-primary" />
-              Por que FlexNet?
-            </Button>
+            {/* Dropdown de Cidade */}
+            <div ref={dropdownRef} className="relative">
+              <button
+                onClick={() => setDropdownOpen(!dropdownOpen)}
+                className="flex items-center gap-2 px-6 py-4 rounded-xl border border-border bg-secondary/50 hover:bg-secondary text-foreground transition-colors"
+              >
+                <MapPin className="w-5 h-5 text-primary" />
+                <span className="font-medium">{cidadeSelecionada.nome}</span>
+                <ChevronDown className={`w-4 h-4 text-muted-foreground transition-transform ${dropdownOpen ? 'rotate-180' : ''}`} />
+              </button>
+              
+              <AnimatePresence>
+                {dropdownOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -8 }}
+                    transition={{ duration: 0.15 }}
+                    className="absolute top-full left-0 mt-2 w-full min-w-[180px] py-2 rounded-xl border border-border bg-background shadow-xl z-50"
+                  >
+                    {CIDADES.map((cidade) => (
+                      <button
+                        key={cidade.id}
+                        onClick={() => {
+                          setCidadeSelecionada(cidade);
+                          setDropdownOpen(false);
+                        }}
+                        className={`w-full flex items-center gap-3 px-4 py-3 text-left hover:bg-secondary/50 transition-colors ${
+                          cidadeSelecionada.id === cidade.id ? 'text-primary bg-primary/5' : 'text-foreground'
+                        }`}
+                      >
+                        <MapPin className="w-4 h-4" />
+                        <span>{cidade.nome}</span>
+                      </button>
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
           </motion.div>
 
         </div>
