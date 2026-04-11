@@ -38,11 +38,13 @@ export function ComoFunciona() {
           {/* Container dos steps */}
           <div className="relative flex flex-col lg:flex-row lg:items-start lg:justify-between gap-12 lg:gap-8">
             
-            {/* Linha tracejada horizontal - desktop */}
-            <div className="hidden lg:block absolute top-10 left-[15%] right-[15%] border-t-2 border-dashed border-primary/40" />
+            {/* Linhas tracejadas entre circulos - desktop */}
+            <div className="hidden lg:block absolute top-10 left-[calc(16.66%+50px)] w-[calc(33.33%-60px)] border-t-2 border-dashed border-primary/40" />
+            <div className="hidden lg:block absolute top-10 left-[calc(50%+30px)] w-[calc(33.33%-60px)] border-t-2 border-dashed border-primary/40" />
             
-            {/* Linha tracejada vertical - mobile */}
-            <div className="lg:hidden absolute left-1/2 -translate-x-1/2 top-[80px] bottom-[80px] border-l-2 border-dashed border-primary/40" />
+            {/* Linhas tracejadas entre circulos - mobile */}
+            <div className="lg:hidden absolute left-1/2 -translate-x-1/2 top-[90px] h-[calc(33.33%-30px)] border-l-2 border-dashed border-primary/40" />
+            <div className="lg:hidden absolute left-1/2 -translate-x-1/2 top-[calc(33.33%+90px)] h-[calc(33.33%-30px)] border-l-2 border-dashed border-primary/40" />
 
             {PASSOS.map((passo, index) => (
               <div key={passo.numero} className="flex-1 flex flex-col items-center text-center relative z-10">
@@ -67,14 +69,8 @@ export function ComoFunciona() {
                     {iconMap[passo.numero]}
                   </div>
 
-                  {/* Badge do numero */}
-                  <span className={`
-                    absolute -bottom-1 -right-1 w-7 h-7 rounded-full text-xs font-bold flex items-center justify-center
-                    ${isLastStep(index)
-                      ? 'bg-foreground text-background'
-                      : 'bg-primary/20 text-primary border border-primary/30'
-                    }
-                  `}>
+                  {/* Badge do numero - todos com fundo branco e texto preto */}
+                  <span className="absolute -bottom-1 -right-1 w-7 h-7 rounded-full text-xs font-bold flex items-center justify-center bg-foreground text-background">
                     {passo.numero}
                   </span>
                 </div>

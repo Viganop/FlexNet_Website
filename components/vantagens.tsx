@@ -32,8 +32,10 @@ export function Vantagens() {
 
         {/* Pilares - Layout horizontal com linha conectora */}
         <div className="relative max-w-6xl mx-auto">
-          {/* Linha horizontal conectora - desktop */}
-          <div className="hidden lg:block absolute top-12 left-[10%] right-[10%] h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
+          {/* Linhas horizontais entre circulos - desktop */}
+          <div className="hidden lg:block absolute top-12 left-[calc(12.5%+60px)] w-[calc(25%-70px)] h-px bg-primary/30" />
+          <div className="hidden lg:block absolute top-12 left-[calc(37.5%+30px)] w-[calc(25%-60px)] h-px bg-primary/30" />
+          <div className="hidden lg:block absolute top-12 left-[calc(62.5%+30px)] w-[calc(25%-70px)] h-px bg-primary/30" />
           
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
             {PILARES.map((pilar, index) => (

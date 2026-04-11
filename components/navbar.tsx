@@ -1,13 +1,22 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { Menu, X, Wifi } from 'lucide-react';
+import { useState, useEffect, useRef } from 'react';
+import { Menu, X, Wifi, MapPin, ChevronDown } from 'lucide-react';
 import { NAV_LINKS, WHATSAPP_NUMBER } from '@/lib/constants';
 import { Button } from '@/components/ui/button';
+
+const CIDADES = [
+  { id: 'sao-carlos', nome: 'Sao Carlos' },
+  { id: 'ibate', nome: 'Ibate' },
+  { id: 'araraquara', nome: 'Araraquara' },
+];
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [cidadeSelecionada, setCidadeSelecionada] = useState(CIDADES[0]);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -15,6 +24,17 @@ export function Navbar() {
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Fechar dropdown ao clicar fora
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setDropdownOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
   const handleWhatsApp = () => {
@@ -54,8 +74,40 @@ export function Navbar() {
           ))}
         </div>
 
-        {/* CTA Button */}
-        <div className="hidden lg:block">
+        {/* Cidade + CTA Button */}
+        <div className="hidden lg:flex items-center gap-4">
+          {/* Dropdown de Cidade */}
+          <div ref={dropdownRef} className="relative">
+            <button
+              onClick={() => setDropdownOpen(!dropdownOpen)}
+              className="flex items-center gap-2 px-4 py-2 rounded-lg border border-border/50 bg-secondary/30 hover:bg-secondary/50 text-foreground text-sm transition-colors"
+            >
+              <MapPin className="w-4 h-4 text-primary" />
+              <span>{cidadeSelecionada.nome}</span>
+              <ChevronDown className={`w-3 h-3 text-muted-foreground transition-transform ${dropdownOpen ? 'rotate-180' : ''}`} />
+            </button>
+            
+            {dropdownOpen && (
+              <div className="absolute top-full right-0 mt-2 w-full min-w-[160px] py-2 rounded-xl border border-border bg-background shadow-xl z-50">
+                {CIDADES.map((cidade) => (
+                  <button
+                    key={cidade.id}
+                    onClick={() => {
+                      setCidadeSelecionada(cidade);
+                      setDropdownOpen(false);
+                    }}
+                    className={`w-full flex items-center gap-3 px-4 py-2.5 text-sm text-left hover:bg-secondary/50 transition-colors ${
+                      cidadeSelecionada.id === cidade.id ? 'text-primary bg-primary/5' : 'text-foreground'
+                    }`}
+                  >
+                    <MapPin className="w-4 h-4" />
+                    <span>{cidade.nome}</span>
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+
           <Button 
             onClick={handleWhatsApp}
             className="bg-primary text-primary-foreground hover:bg-primary/90 glow text-base px-6 py-5 font-semibold"
