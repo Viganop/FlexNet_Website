@@ -4,12 +4,8 @@ export const WHATSAPP_NUMBER = '5516999999999';
 export const EMAIL = 'contato@flexnet.com.br';
 
 export const NAV_LINKS = [
-  { label: 'Início', href: '#inicio' },
-  { label: 'Planos', href: '#planos' },
-  { label: 'Vantagens', href: '#vantagens' },
-  { label: 'Cobertura', href: '#cobertura' },
-  { label: 'FAQ', href: '#faq' },
-  { label: 'Contato', href: '#contato' },
+  { label: 'Início',  href: '#inicio' },
+  { label: 'Sobre',   href: '#sobre' },
 ];
 
 export const METRICAS: Metrica[] = [
