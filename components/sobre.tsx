@@ -2,13 +2,6 @@
 
 import { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
-import { Code2, Layers, Rocket, User } from 'lucide-react';
-
-const skills = [
-  { label: 'Front-end', icon: Code2, desc: 'React, Next.js, TypeScript, Tailwind CSS' },
-  { label: 'UI/UX', icon: Layers, desc: 'Design de interfaces modernas e responsivas' },
-  { label: 'Performance', icon: Rocket, desc: 'Otimização, SEO e boas práticas web' },
-];
 
 export function Sobre() {
   const [isVisible, setIsVisible] = useState(false);
@@ -25,99 +18,76 @@ export function Sobre() {
 
   return (
     <section id="sobre" className="relative py-24 bg-background">
-      {/* Subtle grid background */}
-      <div
-        className="absolute inset-0 opacity-[0.03] pointer-events-none"
-        style={{
-          backgroundImage:
-            'linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px)',
-          backgroundSize: '48px 48px',
-        }}
-      />
+      <div className="container mx-auto px-6 max-w-2xl">
 
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="max-w-5xl mx-auto">
+        {/* Breadcrumb */}
+        <motion.p
+          initial={{ opacity: 0, y: 12 }}
+          animate={isVisible ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5 }}
+          className="text-xs font-mono text-muted-foreground tracking-widest mb-4"
+        >
+          &lt; SOBRE /&gt;
+        </motion.p>
 
-          {/* Section header */}
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={isVisible ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6 }}
-            className="flex items-center gap-3 mb-14"
-          >
-            <span className="flex items-center justify-center w-10 h-10 rounded-lg bg-primary/10 border border-primary/20">
-              <User className="w-5 h-5 text-primary" />
-            </span>
-            <h2 className="text-3xl sm:text-4xl font-bold text-foreground">
-              Sobre <span className="gradient-text">mim</span>
-            </h2>
-          </motion.div>
+        {/* Título */}
+        <motion.h2
+          initial={{ opacity: 0, y: 16 }}
+          animate={isVisible ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5, delay: 0.05 }}
+          className="text-4xl sm:text-5xl font-black text-foreground mb-8 leading-tight"
+        >
+          Quem sou <em className="text-primary not-italic">eu</em>
+        </motion.h2>
 
-          <div className="grid lg:grid-cols-2 gap-12 items-start">
+        {/* Parágrafos */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={isVisible ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className="space-y-5 text-muted-foreground leading-relaxed mb-12"
+        >
+          <p>
+            Meu nome é <strong className="text-foreground font-bold">Lucca Viganon Periotto</strong> e sou apaixonado por
+            tecnologia, o que me levou a construir minha trajetória profissional
+            na área de programação. Nos últimos <strong className="text-foreground underline">quatro anos</strong>, venho me
+            aprofundando nas principais ferramentas e tecnologias utilizadas
+            pelo mercado, sempre buscando aplicar <strong className="text-foreground">práticas ágeis</strong> no
+            desenvolvimento de software.
+          </p>
+          <p>
+            Atualmente, estou no último ano da graduação em{' '}
+            <strong className="text-foreground font-bold">Análise e Desenvolvimento de Sistemas</strong> no Senai. Paralelamente à faculdade,
+            atuo como <strong className="text-foreground">freelancer</strong> em diferentes projetos e participo de
+            iniciativas de <strong className="text-foreground">código aberto</strong>, experiências que têm contribuído
+            significativamente para meu crescimento técnico e para a
+            consolidação da minha vivência prática na área de desenvolvimento.
+          </p>
+        </motion.div>
 
-            {/* Bio */}
-            <motion.div
-              initial={{ opacity: 0, x: -24 }}
-              animate={isVisible ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="space-y-5"
-            >
-              <p className="text-lg text-muted-foreground leading-relaxed">
-                Olá! Sou um desenvolvedor apaixonado por criar experiências digitais que combinam
-                <span className="text-foreground font-medium"> design cuidadoso</span> com{' '}
-                <span className="text-foreground font-medium">código de qualidade</span>.
-              </p>
-              <p className="text-muted-foreground leading-relaxed">
-                Tenho experiência construindo produtos web modernos com foco em performance,
-                acessibilidade e usabilidade. Gosto de trabalhar próximo do design para transformar
-                ideias em interfaces que realmente funcionam para as pessoas.
-              </p>
-              <p className="text-muted-foreground leading-relaxed">
-                Quando não estou codando, estou aprendendo sobre novas tecnologias, contribuindo
-                com projetos open source ou explorando como a IA pode ampliar as possibilidades
-                do desenvolvimento front-end.
-              </p>
+        {/* Stats */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={isVisible ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="grid grid-cols-3 gap-8"
+        >
+          {[
+            { value: '4+',  label: 'ANOS DE\nEXPERIÊNCIA' },
+            { value: '10+', label: 'PROJETOS\nENTREGUES' },
+            { value: '8+',  label: 'TECNOLOGIAS\nDOMINADAS' },
+          ].map((stat) => (
+            <div key={stat.label}>
+              <div className="text-3xl sm:text-4xl font-black text-primary mb-1">
+                {stat.value}
+              </div>
+              <div className="text-[10px] font-semibold tracking-widest text-muted-foreground whitespace-pre-line leading-relaxed">
+                {stat.label}
+              </div>
+            </div>
+          ))}
+        </motion.div>
 
-              {/* CTA */}
-              <motion.a
-                href="#contato"
-                whileHover={{ scale: 1.04 }}
-                whileTap={{ scale: 0.97 }}
-                transition={{ type: 'spring', stiffness: 400, damping: 20 }}
-                className="inline-flex items-center gap-2 rounded-md bg-primary px-8 py-3 text-sm font-semibold text-primary-foreground shadow-lg shadow-primary/30 transition-shadow hover:shadow-primary/50 hover:shadow-xl mt-2"
-              >
-                Entre em contato
-              </motion.a>
-            </motion.div>
-
-            {/* Skills cards */}
-            <motion.div
-              initial={{ opacity: 0, x: 24 }}
-              animate={isVisible ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="space-y-4"
-            >
-              {skills.map((skill, i) => (
-                <motion.div
-                  key={skill.label}
-                  initial={{ opacity: 0, y: 16 }}
-                  animate={isVisible ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.5, delay: 0.25 + i * 0.1 }}
-                  className="flex items-start gap-4 p-5 rounded-xl border border-border/50 bg-secondary/30 hover:bg-secondary/60 transition-colors"
-                >
-                  <span className="flex items-center justify-center w-10 h-10 rounded-lg bg-primary/10 border border-primary/20 shrink-0 mt-0.5">
-                    <skill.icon className="w-5 h-5 text-primary" />
-                  </span>
-                  <div>
-                    <p className="font-semibold text-foreground mb-1">{skill.label}</p>
-                    <p className="text-sm text-muted-foreground">{skill.desc}</p>
-                  </div>
-                </motion.div>
-              ))}
-            </motion.div>
-
-          </div>
-        </div>
       </div>
     </section>
   );
